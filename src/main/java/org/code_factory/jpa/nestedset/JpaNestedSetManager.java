@@ -41,7 +41,6 @@ public class JpaNestedSetManager implements NestedSetManager {
     private final Map<Key, Node<?>> nodes;
     private final Map<Class<?>, Configuration> configs;
 
-    @Inject
     public JpaNestedSetManager(EntityManager em) {
         this.em = em;
         this.nodes = new HashMap<Key, Node<?>>();
