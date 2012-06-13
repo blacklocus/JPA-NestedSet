@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
