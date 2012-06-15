@@ -30,6 +30,7 @@ import org.code_factory.jpa.nestedset.annotations.LeftColumn;
 import org.code_factory.jpa.nestedset.annotations.LevelColumn;
 import org.code_factory.jpa.nestedset.annotations.RightColumn;
 import org.code_factory.jpa.nestedset.annotations.RootColumn;
+import org.code_factory.jpa.nestedset.annotations.SortInsertionBy;
 
 /**
  * @author Roman Borschel <roman@code-factory.org>
@@ -204,6 +205,11 @@ public class JpaNestedSetManager implements NestedSetManager {
     Configuration getConfig(Class<?> clazz) {
         if (!this.configs.containsKey(clazz)) {
             Configuration config = new Configuration();
+            SortInsertionBy sortInsertionBy = clazz.getAnnotation(SortInsertionBy.class);
+            if (sortInsertionBy != null) {
+                config.setFieldsToOrderInsertionBy(sortInsertionBy.value());
+            }
+            
             for (Field field : clazz.getDeclaredFields()) {
                 if (field.getAnnotation(LeftColumn.class) != null) {
                     config.setLeftFieldName(field.getName());

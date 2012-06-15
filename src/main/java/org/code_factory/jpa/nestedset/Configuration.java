@@ -19,6 +19,7 @@ class Configuration {
     private String rightFieldName;
     private String levelFieldName;
     private String rootIdFieldName;
+    private String[] fieldsToOrderInsertionBy;
 
     private boolean hasManyRoots = false;
 
@@ -81,6 +82,14 @@ class Configuration {
 
     public boolean hasManyRoots() {
         return this.hasManyRoots;
+    }
+
+    public String[] getFieldsToOrderInsertionBy() {
+        return fieldsToOrderInsertionBy;
+    }
+
+    public void setFieldsToOrderInsertionBy(String[] fieldsToOrderInsertionBy) {
+        this.fieldsToOrderInsertionBy = fieldsToOrderInsertionBy;
     }
 
     @Override public String toString() {
