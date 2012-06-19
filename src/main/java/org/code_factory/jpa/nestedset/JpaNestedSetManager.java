@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -41,7 +40,6 @@ public class JpaNestedSetManager implements NestedSetManager {
     private final Map<Key, Node<?>> nodes;
     private final Map<Class<?>, Configuration> configs;
 
-    @Inject
     public JpaNestedSetManager(EntityManager em) {
         this.em = em;
         this.nodes = new HashMap<Key, Node<?>>();

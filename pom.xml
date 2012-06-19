@@ -4,7 +4,7 @@
   <groupId>org.code_factory</groupId>
   <artifactId>JpaNestedSet</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>BL-1.0-SNAPSHOT</version>
   <name>JpaNestedSet</name>
   <url>http://maven.apache.org</url>
   <build>
@@ -28,6 +28,18 @@
               <configuration>
                   <!--<groups>debug</groups>-->
               </configuration>
+          </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-source-plugin</artifactId>
+              <executions>
+                  <execution>
+                      <id>attach-sources</id>
+                      <goals>
+                          <goal>jar</goal>
+                      </goals>
+                  </execution>
+              </executions>
           </plugin>
       </plugins>
   </build>
@@ -74,12 +86,6 @@
           <version>5.10</version>
           <scope>test</scope>
           <classifier>jdk15</classifier>
-      </dependency>
-      <dependency>
-          <groupId>javax.inject</groupId>
-          <artifactId>javax.inject</artifactId>
-          <version>1</version>
-          <scope>provided</scope>
       </dependency>
       <dependency>
           <groupId>org.eclipse.persistence</groupId>
