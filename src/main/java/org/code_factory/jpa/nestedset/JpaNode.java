@@ -11,6 +11,9 @@ package org.code_factory.jpa.nestedset;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -291,7 +294,19 @@ class JpaNode<T extends NodeInfo> implements Node<T> {
         if (child == this.node) {
             throw new IllegalArgumentException("Cannot add node as child of itself.");
         }
-
+        
+        //Pessimistically lock the table from this node and rightwards then refresh for the sake of concurrency:
+        EntityManager em = nsm.getEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<T> cq = getBaseQuery();
+        cq.where(
+                 cb.ge(queryRoot.get(nsm.getConfig(this.type).getLeftFieldName()).as(Number.class),
+                       getLeftValue()
+                 )
+        );
+        em.createQuery(cq).setLockMode(LockModeType.PESSIMISTIC_WRITE).getResultList(); //Result list not used, just need lock.
+        em.refresh(node);
+        
         int newLeft = getRightValue();
         int newRight = getRightValue() + 1;
         int newRoot = getRootValue();
