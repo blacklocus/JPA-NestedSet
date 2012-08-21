@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -237,7 +238,11 @@ public class JpaNestedSetManager implements NestedSetManager {
     	CriteriaQuery<? extends NodeInfo> cq = cb.createQuery(clazz);
         Root<? extends NodeInfo> queryRoot = cq.from(clazz);
         cq.orderBy(cb.desc(queryRoot.get(config.getRightFieldName())));
-        List<? extends NodeInfo>highestRows = em.createQuery(cq).setMaxResults(1).getResultList();
+        /* Assume that we're getting the rightmost entry for inserting at the end of the tree, lock for protection
+         * against other transactions assuming the same rightmost value.
+         */
+        List<? extends NodeInfo>highestRows =
+                em.createQuery(cq).setMaxResults(1).setLockMode(LockModeType.PESSIMISTIC_WRITE).getResultList();
         if (highestRows.isEmpty()) {
         	return 0;
         } else {
