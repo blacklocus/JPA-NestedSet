@@ -214,11 +214,11 @@ class JpaNode<T extends NodeInfo> implements Node<T> {
         CriteriaBuilder cb = nsm.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<T> cq = getBaseQuery();
         cq.where(cb.lt(
-                    queryRoot.get(nsm.getConfig(this.type).getLeftFieldName()).as(Number.class),
+                    queryRoot.<Number>get(nsm.getConfig(this.type).getLeftFieldName()),
                     getLeftValue()
                     ),
                 cb.gt(
-                    queryRoot.get(nsm.getConfig(this.type).getRightFieldName()).as(Number.class),
+                    queryRoot.<Number>get(nsm.getConfig(this.type).getRightFieldName()),
                     getRightValue()
                     ));
         cq.orderBy(cb.asc(queryRoot.get(nsm.getConfig(this.type).getRightFieldName())));
@@ -251,11 +251,11 @@ class JpaNode<T extends NodeInfo> implements Node<T> {
         CriteriaQuery<T> cq = getBaseQuery();
         Predicate wherePredicate = cb.and(
                 cb.gt(
-                    queryRoot.get(nsm.getConfig(this.type).getLeftFieldName()).as(Number.class),
+                    queryRoot.<Number>get(nsm.getConfig(this.type).getLeftFieldName()),
                     getLeftValue()
                     ),
                 cb.lt(
-                    queryRoot.get(nsm.getConfig(this.type).getRightFieldName()).as(Number.class),
+                    queryRoot.<Number>get(nsm.getConfig(this.type).getRightFieldName()),
                     getRightValue()
                     ));
 
@@ -263,7 +263,7 @@ class JpaNode<T extends NodeInfo> implements Node<T> {
             wherePredicate = cb.and(
                     wherePredicate,
                     cb.le(
-                        queryRoot.get(nsm.getConfig(this.type).getLevelFieldName()).as(Number.class),
+                        queryRoot.<Number>get(nsm.getConfig(this.type).getLevelFieldName()),
                         getLevel() + depth)
                         );
         }
@@ -300,7 +300,7 @@ class JpaNode<T extends NodeInfo> implements Node<T> {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> cq = getBaseQuery();
         cq.where(
-                 cb.ge(queryRoot.get(nsm.getConfig(this.type).getLeftFieldName()).as(Number.class),
+                 cb.ge(queryRoot.<Number>get(nsm.getConfig(this.type).getLeftFieldName()),
                        getLeftValue()
                  )
         );
@@ -578,8 +578,8 @@ class JpaNode<T extends NodeInfo> implements Node<T> {
         CriteriaBuilder cb = nsm.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<T> cq = getBaseQuery();
         Predicate wherePredicate = cb.and(
-                cb.lt(queryRoot.get(nsm.getConfig(this.type).getLeftFieldName()).as(Number.class), getLeftValue()),
-                cb.gt(queryRoot.get(nsm.getConfig(this.type).getRightFieldName()).as(Number.class), getRightValue())
+                cb.lt(queryRoot.<Number>get(nsm.getConfig(this.type).getLeftFieldName()), getLeftValue()),
+                cb.gt(queryRoot.<Number>get(nsm.getConfig(this.type).getRightFieldName()), getRightValue())
                 );
 
         cq.where(wherePredicate);
