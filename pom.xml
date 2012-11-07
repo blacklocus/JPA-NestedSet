@@ -4,7 +4,7 @@
   <groupId>org.code_factory</groupId>
   <artifactId>JpaNestedSet</artifactId>
   <packaging>jar</packaging>
-  <version>BL-1.1-SNAPSHOT</version>
+  <version>BL-1.2-SNAPSHOT</version>
   <name>JpaNestedSet</name>
   <url>http://maven.apache.org</url>
   <build>

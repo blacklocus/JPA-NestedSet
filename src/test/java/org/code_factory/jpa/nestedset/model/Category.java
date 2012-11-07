@@ -36,7 +36,7 @@ public class Category implements NodeInfo {
     @RootColumn
     private int rootId;
 
-    @Override public int getId() {
+    @Override public Integer getId() {
         return this.id;
     }
 
