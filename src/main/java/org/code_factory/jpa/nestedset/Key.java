@@ -17,9 +17,9 @@ import net.jcip.annotations.Immutable;
 @Immutable
 class Key {
     private final Class<?> clazz;
-    private final int id;
+    private final long id;
 
-    public Key(Class<?> clazz, int id) {
+    public Key(Class<?> clazz, long id) {
         this.clazz = clazz;
         this.id = id;
     }
@@ -27,7 +27,8 @@ class Key {
     @Override public int hashCode() {
         int hash = 7;
         hash = 23 * hash + (this.clazz != null ? this.clazz.hashCode() : 0);
-        hash = 23 * hash + this.id;
+        // hashing the (long) id using the same method as Long.hashCode
+        hash = 23 * hash + (int)(id ^ (id >>> 32));
         return hash;
     }
 

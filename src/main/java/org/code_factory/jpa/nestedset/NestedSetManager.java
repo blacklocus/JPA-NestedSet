@@ -9,9 +9,9 @@
 
 package org.code_factory.jpa.nestedset;
 
+import javax.persistence.EntityManager;
 import java.util.Collection;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  * A <tt>NestedSetManager</tt> is used to read and manipulate the nested set tree structure of
@@ -53,7 +53,6 @@ public interface NestedSetManager {
      *
      * @param <T>
      * @param clazz
-     * @param rootId
      * @return The root node of the tree.
      */
     <T extends NodeInfo> Node<T> fetchTree(Class<T> clazz);

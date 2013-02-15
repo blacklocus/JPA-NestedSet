@@ -16,7 +16,7 @@ package org.code_factory.jpa.nestedset;
  * @author Roman Borschel <roman@code-factory.org>
  */
 public interface NodeInfo {
-    Integer getId();
+    Long getId();
     int getLeftValue();
     int getRightValue();
     int getLevel();

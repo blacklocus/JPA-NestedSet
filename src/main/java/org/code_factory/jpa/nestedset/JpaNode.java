@@ -61,7 +61,7 @@ class JpaNode<T extends NodeInfo> implements Node<T> {
         this.type = (Class<T>) node.getClass();
     }
 
-    @Override public Integer getId() {
+    @Override public Long getId() {
         return this.node.getId();
     }
 
